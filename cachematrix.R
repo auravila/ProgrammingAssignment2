@@ -1,8 +1,7 @@
-## Put comments here that give an overall description of what your
-## functions do
+## Assingment2
+## Matrix inversion by making use of Scoping rules of R
 
-## Write a short comment describing this function
-
+## Cache the inverse of a matrix, assuming the matrix has an inverse
 makeCacheMatrix <- function(x = matrix()) {
       InverseM <- NULL
       set <- function(y) {
@@ -10,23 +9,24 @@ makeCacheMatrix <- function(x = matrix()) {
             InverseM <<- NULL
       }
       get        <- function() x
-      setInverse <- function(solve) InverseM <<- solve
+      setInverse <- function(Inverse) InverseM <<- Inverse
       getInverse <- function() InverseM
-      list(set = set, get = get, setInverse = setInverse, getInverse = getInverse)
+      list(set=set, get=get, setInverse=setInverse, getInverse=getInverse)
 }
 
 
-## Write a short comment describing this function
+## Solve a matrix inverse or retrieve one by referring to 
+## a matrix cache function
 
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
-      m <- x$getInverse()
-      if(!is.null(m)) {
-            message("getting inverse matrix")
-            return(m)
+      ## Return a matrix that is the inverse of 'x'
+      InverseM <- x$getInverse()
+      if(!is.null(InverseM)) {
+            message("Getting cached inverse matrix")
+            return(InverseM)
       }
       data <- x$get()
-      m <- solve(x, ...)
-      x$setinverse(m)
-      m
+      InverseM <- solve(data)
+      x$setInverse(InverseM)
+      InverseM
 }
